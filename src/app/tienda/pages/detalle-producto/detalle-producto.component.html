@@ -1,0 +1,19 @@
+<app-loader *ngIf="loading"></app-loader>
+<div class="box"  *ngIf="!loading">
+  <picture class="card__picture">
+    <img [src]="producto.image" [alt]="producto.title" class="card__image" />
+  </picture>
+  <div class="card">
+    <section class="card__description">
+      <article class="card__information">
+        <h4 class="card__title">{{ producto.title }}</h4>
+        <span class="card__price">${{ producto.price }}</span>
+        <button class="card__btn">Add to Cart</button>
+        <span class="card__rel">
+          {{ producto.description }}
+        </span>
+      </article>
+    </section>
+  </div>
+</div>
+

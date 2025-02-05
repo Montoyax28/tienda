@@ -1,0 +1,8 @@
+
+<div class="w 100 h-100 d-flex products">
+  <app-loader *ngIf="loading"></app-loader>
+  <ng-container *ngIf="!loading">
+    <app-card *ngFor="let producto of productos" [producto]="producto"></app-card>
+  </ng-container>
+
+</div>

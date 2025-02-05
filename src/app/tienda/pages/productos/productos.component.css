@@ -1,0 +1,15 @@
+:host{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.products {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+}
