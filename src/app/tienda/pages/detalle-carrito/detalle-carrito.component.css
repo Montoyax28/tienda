@@ -2,3 +2,23 @@
   width: 10px;
   height: 10px;
 }
+
+.cart {
+  width: 90%;
+  margin: 15px auto;
+  height: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+td > img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.input_unidades {
+  width: 45px;
+}

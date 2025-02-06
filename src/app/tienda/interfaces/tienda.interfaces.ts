@@ -1,20 +1,20 @@
 export interface Producto {
-  category:    string;
+  category: string;
   description: string;
-  id:          number;
-  image:       string;
-  price:       number;
-  rating:      Rating;
-  title:       string;
+  id: number;
+  image: string;
+  price: number;
+  rating: Rating;
+  title: string;
+  unidades?: number;
 }
 
 export interface Rating {
   count: number;
-  rate:  number;
+  rate: number;
 }
 
-
-export interface NavBarItem{
+export interface NavBarItem {
   nombre: string;
   route: string;
 }

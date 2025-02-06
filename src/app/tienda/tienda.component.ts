@@ -20,5 +20,6 @@ export class TiendaComponent implements OnInit {
 
   constructor(private readonly service: TiendaService) {}
 
+
   ngOnInit(): void {}
 }

@@ -40,6 +40,10 @@
   cursor: pointer;
 }
 
+.card__btn:hover {
+  background-color: #d9d9d9;
+}
+
 .card__btn--viewProduct {
   bottom: 70px;
 }

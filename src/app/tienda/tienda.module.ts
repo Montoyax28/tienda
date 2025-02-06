@@ -12,6 +12,7 @@ import { DetalleCarritoComponent } from './pages/detalle-carrito/detalle-carrito
 import { DetalleProductoComponent } from './pages/detalle-producto/detalle-producto.component';
 import { TiendaComponent } from './tienda.component';
 import { ProductosComponent } from './pages/productos/productos.component';
+import { CarritoService } from './services/carrito.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,6 @@ import { ProductosComponent } from './pages/productos/productos.component';
     ProductosComponent,
   ],
   imports: [CommonModule, TiendaRoutingModule, ComponentsModule, SharedModule],
-  providers: [TiendaService],
+  providers: [TiendaService, CarritoService],
 })
 export class TiendaModule {}

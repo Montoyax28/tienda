@@ -8,9 +8,10 @@
       <article class="card__information">
         <h4 class="card__title">{{ producto.title }}</h4>
         <span class="card__price">${{ producto.price }}</span>
-        <button class="card__btn">Add to Cart</button>
+        <button class="card__btn"  (click)="addToCart(producto)">Add to Cart</button>
         <span class="card__rel">
           {{ producto.description }}
+          {{ total | currency }}
         </span>
       </article>
     </section>

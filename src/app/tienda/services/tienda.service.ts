@@ -9,8 +9,6 @@ import { Producto } from '../interfaces/tienda.interfaces';
 export class TiendaService {
   baseUrl: string = environment.baseUrl;
 
-  productos: Producto[] = []
-
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Producto[]> {
@@ -20,4 +18,5 @@ export class TiendaService {
   getProductById(id: number): Observable<Producto>  {
     return this.http.get<Producto>(`${this.baseUrl}/products/${id}`);
   }
+
 }
