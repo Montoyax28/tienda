@@ -15,6 +15,10 @@ td > img {
   object-fit: contain;
 }
 
+.input_unidades {
+  width: 60px;
+}
+
 .total-container {
   display: flex;
   flex-direction: row-reverse;

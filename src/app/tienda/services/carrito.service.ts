@@ -46,5 +46,14 @@ export class CarritoService {
   private actualizarLocalStorage(): void {
     localStorage.setItem('carrito', JSON.stringify(this.carrito));
   }
+
+  updateItemQuantity(producto: Producto, cantidad: number): void {
+    this.carrito = this.carrito.map((item) =>
+      item.id === producto.id ? { ...item, unidades: cantidad } : item
+    );
+
+    localStorage.setItem('carrito', JSON.stringify(this.carrito));
+  }
+
 }
 

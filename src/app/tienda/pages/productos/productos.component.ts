@@ -5,19 +5,32 @@ import { Producto } from '../../interfaces/tienda.interfaces';
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.css'],
+  styleUrls: ['./productos.component.css']
 })
 export class ProductosComponent implements OnInit {
   productos: Producto[] = [];
-  loading = true;
+  loading: boolean = true;
 
-  constructor(private readonly service: TiendaService) {}
+  constructor(private tiendaService: TiendaService) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.service.getProducts().subscribe((productos) => {
+    this.obtenerProductos();
+    this.tiendaService.productosActualizados.subscribe(productos => {
       this.productos = productos;
-      if (productos.length > 0) this.loading = false;
+    });
+  }
+
+  obtenerProductos(): void {
+    this.loading = true;
+    this.tiendaService.getProducts().subscribe({
+      next: (productos) => {
+        this.productos = productos;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error al obtener productos:', error);
+        this.loading = false;
+      }
     });
   }
 }

@@ -1,0 +1,54 @@
+<div class="container">
+  <h2 class="text-center">Vender Producto</h2>
+
+  <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
+    <div class="mb-3">
+      <label for="id" class="form-label">ID</label>
+      <input type="number" id="id" class="form-control" formControlName="id" min="1" required />
+      <div *ngIf="productoForm.get('id')?.invalid && productoForm.get('id')?.touched" class="text-danger">
+        El ID es obligatorio.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Nombre</label>
+      <input type="text" id="title" class="form-control" formControlName="title" required />
+      <div *ngIf="productoForm.get('title')?.invalid && productoForm.get('title')?.touched" class="text-danger">
+        El nombre es obligatorio.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Precio</label>
+      <input type="number" id="price" class="form-control" formControlName="price" required />
+      <div *ngIf="productoForm.get('price')?.invalid && productoForm.get('price')?.touched" class="text-danger">
+        El precio es obligatorio y debe ser mayor a 0.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripción</label>
+      <textarea id="description" class="form-control" formControlName="description" required></textarea>
+      <div *ngIf="productoForm.get('description')?.invalid && productoForm.get('description')?.touched" class="text-danger">
+        La descripción es obligatoria.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Imagen URL</label>
+      <input type="text" id="image" class="form-control" formControlName="image" required (input)="actualizarVistaPrevia()"/>
+      <div *ngIf="productoForm.get('image')?.invalid && productoForm.get('image')?.touched" class="text-danger">
+        La URL de la imagen es obligatoria.
+      </div>
+    </div>
+
+    <!-- Vista previa de la imagen -->
+    <div class="text-center mb-3" *ngIf="productoForm.get('image')?.value">
+      <img [src]="productoForm.get('image')?.value" alt="Vista previa" class="img-thumbnail" style="max-width: 200px;"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100" [disabled]="productoForm.invalid">
+      Guardar Producto
+    </button>
+  </form>
+</div>

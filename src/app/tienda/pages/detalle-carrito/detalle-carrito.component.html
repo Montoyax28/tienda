@@ -24,7 +24,13 @@
           {{ item.title }}
         </td>
         <td>
-          {{ item.unidades }}
+          <input
+              type="number"
+              class="input_unidades"
+              [value]="item.unidades"
+              (change)="updateUnits(item, $event)"
+              min="1"
+          />
         </td>
         <td>
           ${{ item.price * item.unidades! | number:'1.2-2' }}
@@ -39,6 +45,6 @@
   </table>
 
   <div class="total-container">
-    <h3>Total: ${{ total | number:'1.2-2' }}</h3>
+    <h3>Total: ${{ totalCartPrice | number }}</h3>
   </div>
 </div>

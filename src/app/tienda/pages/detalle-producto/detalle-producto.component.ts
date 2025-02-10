@@ -28,12 +28,30 @@ export class DetalleProductoComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.sub0 = this.activatedRoute.params
-      .pipe(switchMap(({ id }) => this.service.getProductById(Number(id))))
-      .subscribe((producto) => {
-        this.producto = producto;
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    if (id) {
+      const productoId = Number(id);
+
+      let productosGuardados: Producto[] = JSON.parse(localStorage.getItem('productosCreados') || '[]');
+      let productoLocal = productosGuardados.find(p => p.id === productoId);
+
+      if (productoLocal) {
+        this.producto = productoLocal;
         this.loading = false;
-      });
+      } else {
+        this.sub0 = this.service.getProductById(productoId).subscribe({
+          next: (producto) => {
+            this.producto = producto;
+            this.loading = false;
+          },
+          error: (err) => {
+            console.error('Error al obtener producto:', err);
+            this.loading = false;
+          }
+        });
+      }
+    }
   }
 
   addToCart(producto: Producto): void {
@@ -41,7 +59,6 @@ export class DetalleProductoComponent implements OnInit, OnDestroy {
     this.total = this.carritoService.getTotal();
   }
 
-  // Función para manejar el zoom
   onZoom(event: MouseEvent): void {
     if (!this.imageZoom) return;
 
@@ -49,8 +66,8 @@ export class DetalleProductoComponent implements OnInit, OnDestroy {
 
     const img = this.imageZoom.nativeElement;
     const rect = img.getBoundingClientRect();
-    let x = event.clientX - rect.left; // Posición relativa en X
-    let y = event.clientY - rect.top; // Posición relativa en Y
+    let x = event.clientX - rect.left;
+    let y = event.clientY - rect.top;
     const width = rect.width;
     const height = rect.height;
     const zoomFactor = 2;
@@ -60,17 +77,15 @@ export class DetalleProductoComponent implements OnInit, OnDestroy {
     x = Math.max(halfLens, Math.min(x, width - halfLens));
     y = Math.max(halfLens, Math.min(y, height - halfLens));
 
-    // Ajuste de la lupa
     this.zoomStyle = {
       left: `${x - halfLens}px`,
       top: `${y - halfLens}px`,
       backgroundImage: `url(${this.producto.image})`,
-      backgroundSize: `${width * zoomFactor}px ${height *zoomFactor}px`,
-       backgroundPosition: `-${(x * zoomFactor) - halfLens}px -${(y * zoomFactor) - halfLens}px`
+      backgroundSize: `${width * zoomFactor}px ${height * zoomFactor}px`,
+      backgroundPosition: `-${(x * zoomFactor) - halfLens}px -${(y * zoomFactor) - halfLens}px`
     };
   }
 
-  // Ocultar lupa cuando el mouse sale de la imagen
   resetZoom(): void {
     this.zoomActive = false;
   }

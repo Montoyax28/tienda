@@ -5,6 +5,7 @@ import { DetalleCarritoComponent } from './pages/detalle-carrito/detalle-carrito
 import { DetalleProductoComponent } from './pages/detalle-producto/detalle-producto.component';
 import { TiendaComponent } from './tienda.component';
 import { ProductosComponent } from './pages/productos/productos.component';
+import { VenderProductoComponent } from './pages/vender-producto/vender-producto.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'carrito',
         component:DetalleCarritoComponent
+      },
+      {
+        path: 'vender',
+        component:VenderProductoComponent
       },
       {
         path: '**',

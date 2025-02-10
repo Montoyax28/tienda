@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavBarItem, Producto } from '../../tienda/interfaces/tienda.interfaces';
 import { CarritoService } from 'src/app/tienda/services/carrito.service';
 
@@ -7,12 +8,12 @@ import { CarritoService } from 'src/app/tienda/services/carrito.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavBarComponent  {
-  //botones del nav
+export class NavBarComponent {
+  // Botones del nav
   listNavbar: NavBarItem[] = [
     {
       nombre: 'Productos',
-      route: 'tienda',
+      route: 'productos',
     },
     {
       nombre: 'Ir al Carrito',
@@ -20,28 +21,30 @@ export class NavBarComponent  {
     },
   ];
 
+  constructor(
+    private readonly service: CarritoService,
+    private router: Router // 🔹 Inyectamos el Router para la navegación
+  ) {}
 
-  constructor(private readonly service: CarritoService) {}
-
-  //botones del Dropdown
+  // Botones del Dropdown
   carritoNav: NavBarItem | undefined;
 
-   ngOnInit() {
+  ngOnInit() {
     this.carritoNav = this.listNavbar.find(item => item.nombre === 'Ir al Carrito');
-   }
-//
-   get stateCart(){
-     return this.service.currentCart
-   }
+  }
 
-  deleteProduct(producto: Producto):void {
-    this.service.removeItemCart(producto)
+  get stateCart() {
+    return this.service.currentCart;
+  }
+
+  deleteProduct(producto: Producto): void {
+    this.service.removeItemCart(producto);
   }
 
   isModalOpen = false;
   isDropdownOpen = false;
 
-  //boton con desplegable
+  // Botón con desplegable
   @ViewChild('dropdown') dropdown!: ElementRef;
 
   toggleDropdown(event: Event) {
@@ -64,7 +67,11 @@ export class NavBarComponent  {
     }
   }
 
-  //popup
+  goToVenderProducto() {
+    this.router.navigate(['/tienda/vender']); // 🔹 Ruta corregida
+  }
+
+  // Popup
   openModal() {
     this.isModalOpen = true;
   }
@@ -72,5 +79,4 @@ export class NavBarComponent  {
   closeModal() {
     this.isModalOpen = false;
   }
-
 }
